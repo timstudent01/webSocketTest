@@ -40,7 +40,7 @@ function App() {
         const newWs = new WebSocket('ws://localhost:4060')
 
         newWs.addEventListener('open', ()=>{
-            console.log('%c Web WebSocket 已建立: ws://localhost:4060', 'color: green;')
+            console.log('%c Web WebSocket 已建立: ws://localhost:4060', 'color: green; font-size: 12px; font-weight:700')
             newWs.send(JSON.stringify(member));
             console.log("已傳送資料於 server")
 
@@ -96,13 +96,15 @@ function App() {
                     <div className={" mt-4 w-full flex justify-center"}>
                         <div className={"flex flex-col w-[80%] mb-4 overflow-y-auto h-[500px] border-b-amber-200 border-2 md:w-1/2"}>
                             {message.talk.map((item)=>(
-                                <div className={item.sendId === member.id ? "w-full flex justify-start":"w-full flex justify-end"}>
+                                <div key={`${item.text}_${item.sendId}`} className={item.sendId === member.id ? "w-full flex justify-start":"w-full flex justify-end"}>
                                     <div className={item.sendId === member.id ? "flex justify-between w-1/2 mt-4 bg-amber-200 rounded-lg p-2 hover:bg-amber-300" : "rounded-lg p-2 flex justify-between w-1/2 mt-4 bg-pink-200 hover:bg-pink-300"}>
-                                        <div className="w-3/4 break-all">
+                                        <div className="w-[90%] break-all">
                                             {item.text}
                                         </div>
-                                        <div className={"text-gray-400 hover:text-gray-600"}>
-                                            {item.time}
+                                        <div className="flex items-end">
+                                            <div className={"text-gray-400 hover:text-gray-600"}>
+                                                {item.time}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
